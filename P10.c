@@ -19,7 +19,7 @@ typedef struct
 	Dimensoes dimensoes;
 }Produto;
 
-int sizeofFile(char nomearquivo[NCHAR_NOME])
+int sizeof_file(char nomearquivo[NCHAR_NOME])
 {
 	int sof = 0;
 	
@@ -40,18 +40,23 @@ int sizeofFile(char nomearquivo[NCHAR_NOME])
 }
 
 
-void cadastrarNovo(Produto *p, int cont)
+void cadastrar_novo(Produto *p, int cont)
 {
 	printf("Nome do produto: ");
-	scanf("%s", p[cont].nome); getchar();
+	scanf("%s", p[cont].nome);
+	getchar();
 	printf("Preco: ");
-	scanf("%f", &p[cont].preco); getchar();
+	scanf("%f", &p[cont].preco); 
+	getchar();
 	printf("Largura: ");
-	scanf("%f", &p[cont].dimensoes.largura); getchar();
+	scanf("%f", &p[cont].dimensoes.largura); 
+	getchar();
 	printf("Profundidade: ");
-	scanf("%f", &p[cont].dimensoes.profundidade); getchar();
+	scanf("%f", &p[cont].dimensoes.profundidade); 
+	getchar();
 	printf("Altura:");
-	scanf("%f", &p[cont].dimensoes.altura); getchar();
+	scanf("%f", &p[cont].dimensoes.altura); 
+	getchar();
 	printf("\nCadastrado com sucesso!\n\n");
 }
 
@@ -84,7 +89,7 @@ void consultar(Produto *p, int cont)
 	}
 }
 
-void abrirArq(Produto *p, int *cont)
+void abrir_arq(Produto *p, int *cont)
 {
 	FILE *arquivo;
 	char nomearquivo[NCHAR_NOME];
@@ -92,7 +97,7 @@ void abrirArq(Produto *p, int *cont)
 	printf("\nNome do arquivo: ");
 	scanf("%s", nomearquivo);
 	
-	int sof = sizeofFile(nomearquivo), i;
+	int sof = sizeof_file(nomearquivo), i;
 	
 	if (sof > 0)
 	{
@@ -120,7 +125,7 @@ void abrirArq(Produto *p, int *cont)
 		fprintf(stderr, ">>> Carregamento nao efetuado!\n\n");	
 }
 
-void salvarArq(Produto *p, int cont)
+void salvar_arq(Produto *p, int cont)
 {
 	FILE *arq;
 	int i = 0;
@@ -141,8 +146,9 @@ void salvarArq(Produto *p, int cont)
 		}
 		printf("Produtos armazenados em disco com sucesso!\n\n");
 		fclose(arq);
-	}else
-		printf("Erro: n„o foi possÌvel abrir o arquivo\n\n");
+	}
+	else
+		printf("Erro: n√£o foi poss√≠vel abrir o arquivo\n\n");
 }
 
 int main()
@@ -150,11 +156,9 @@ int main()
 	Produto *p;
 	int cont = 0, op;
 	p = malloc(sizeof(Produto));
-	
 	do
 	{
-		printf("Produtos em memoria: %d\n\n1. Consultar\n2. Cadastrar novo\n3. Carregar de arquivo para memoria (sobrescreve memoria)"
-				"\n4. Salvar memoria em arquivo (sobrescreve arquivo)\n0. Encerra\n\nOpcao escolhida: ", cont);
+		printf("Produtos em memoria: %d\n\n1. Consultar\n2. Cadastrar novo\n3. Carregar de arquivo para memoria (sobrescreve memoria)\n4. Salvar memoria em arquivo (sobrescreve arquivo)\n0. Encerra\n: ", cont);
 		scanf("%d", &op); getchar();
 
 		switch(op)
@@ -163,14 +167,14 @@ int main()
 				consultar(p, cont);
 				break;
 			case 2:
-				cadastrarNovo(p, cont);
+				cadastrar_novo(p, cont);
 				cont++;
 				break;
 			case 3:
-				abrirArq(p, &cont);
+				abrir_arq(p, &cont);
 				break;
 			case 4:
-				salvarArq(p, cont);
+				salvar_arq(p, cont);
 				break;
 		}	
 	}while(op!=0);
