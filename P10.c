@@ -148,7 +148,7 @@ void salvar_arq(Produto *p, int cont)
 		fclose(arq);
 	}
 	else
-		printf("Erro: não foi possível abrir o arquivo\n\n");
+		printf("Nao foi possível abrir o arquivo\n\n");
 }
 
 int main()
